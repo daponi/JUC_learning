@@ -4,6 +4,12 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Lock实现线程间通信的Demo
+ * 使用await()时一定要注意虚假唤醒，参考文档可以将它放在循环里使用
+ * 若用if可能会出现多次同一个线程执行， 跳过了if导致虚假唤醒
+ */
+
 //第一步 创建资源类，定义属性和操作方法
 class Share {
     private int number = 0;
@@ -17,7 +23,7 @@ class Share {
         //上锁
         lock.lock();
         try {
-            //判断
+            //判断写到循环里，防止虚假唤醒
             while (number != 0) {
                 condition.await();
             }
@@ -36,6 +42,7 @@ class Share {
     public void decr() throws InterruptedException {
         lock.lock();
         try {
+            //判断写到循环里，防止虚假唤醒
             while(number != 1) {
                 condition.await();
             }
@@ -47,7 +54,7 @@ class Share {
         }
     }
 }
-
+@SuppressWarnings({"all"})
 public class ThreadDemo2 {
 
     public static void main(String[] args) {
@@ -61,6 +68,7 @@ public class ThreadDemo2 {
                 }
             }
         },"AA").start();
+
         new Thread(()->{
             for (int i = 1; i <=10; i++) {
                 try {
@@ -80,6 +88,7 @@ public class ThreadDemo2 {
                 }
             }
         },"CC").start();
+
         new Thread(()->{
             for (int i = 1; i <=10; i++) {
                 try {
