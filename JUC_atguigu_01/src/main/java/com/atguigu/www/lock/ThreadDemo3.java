@@ -5,14 +5,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- *  线程定制化通信：让线程按顺序执行
+ *  线程定制化通信：Lock让线程按顺序执行
  *  问题: A 线程打印 5 次 A，B 线程打印 10 次 B，C 线程打印 15 次 C,按照此顺序循环 10 轮
  *  同一个condition只能随机唤醒，或者全部唤醒这样你的打印顺序无法保证，多个condition就有多个等待池, 可以指定唤醒，就保证了顺序性。
  */
 //第一步 创建资源类
 class ShareResource {
-    //定义标志位
-    private int flag = 1;  // 1 AA     2 BB     3 CC
+    //定义标志位,标识该哪个线程打印:1 AA     2 BB     3 CC
+    private int flag = 1;
 
     //创建Lock锁，同一个condition只能随机唤醒，或者全部唤醒这样你的打印顺序无法保证，多个condition就有多个等待池, 可以指定唤醒
     private Lock lock = new ReentrantLock();
@@ -84,6 +84,7 @@ class ShareResource {
     }
 }
 
+@SuppressWarnings({"all"})
 public class ThreadDemo3 {
     public static void main(String[] args) {
         ShareResource shareResource = new ShareResource();

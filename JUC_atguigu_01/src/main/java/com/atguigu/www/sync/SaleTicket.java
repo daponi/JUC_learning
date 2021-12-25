@@ -2,6 +2,8 @@ package com.atguigu.www.sync;
 
 /**
  * 使用synchronized的Demo
+ * java操作一个资源，要先new一个资源类，实体变量+实体方法，方法即暴露对线程操作的接口
+ * 卖票Demo
  */
 
 //第一步  创建资源类，定义属性和和操作方法
@@ -15,6 +17,7 @@ class Ticket{
         }
     }
 }
+@SuppressWarnings({"all"})
 public class SaleTicket {
     //第二步 创建多个线程，调用资源类的操作方法
     public static void main(String[] args) {
