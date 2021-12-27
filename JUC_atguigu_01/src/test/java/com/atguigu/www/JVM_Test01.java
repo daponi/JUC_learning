@@ -1,6 +1,7 @@
 package com.atguigu.www;
 
 import org.junit.Test;
+import org.junit.validator.PublicClassValidator;
 import sun.misc.VM;
 
 import javax.swing.plaf.PanelUI;
@@ -67,6 +68,16 @@ public class JVM_Test01 {
     @Test
     public void test04() {
         Byte[] bytes = new Byte[40 * 1024 * 1024];
+    }
+
+    @Test
+    public void test05(){
+        int i=10,k =10;
+        i=i++;
+        int j=++k;
+        System.out.println(i);
+        System.out.println(j);
+        System.out.println(i++);
     }
 
     static void method01() {
