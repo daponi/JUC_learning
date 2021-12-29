@@ -5,9 +5,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- *  线程定制化通信：Lock让线程按顺序执行
- *  问题: A 线程打印 5 次 A，B 线程打印 10 次 B，C 线程打印 15 次 C,按照此顺序循环 10 轮
- *  同一个condition只能随机唤醒，或者全部唤醒这样你的打印顺序无法保证，多个condition就有多个等待池, 可以指定唤醒，就保证了顺序性。
+ * 线程定制化通信：Lock让线程按顺序执行
+ * 问题: A 线程打印 5 次 A，B 线程打印 10 次 B，C 线程打印 15 次 C,按照此顺序循环 10 轮
+ * 同一个condition只能随机唤醒，或者全部唤醒这样你的打印顺序无法保证，多个condition就有多个等待池, 可以指定唤醒，就保证了顺序性。
  */
 //第一步 创建资源类
 class ShareResource {
@@ -28,18 +28,18 @@ class ShareResource {
         lock.lock();
         try {
             //判断
-            while(flag != 1) {
+            while (flag != 1) {
                 //等待
                 c1.await();
             }
             //干活
-            for (int i = 1; i <=5; i++) {
-                System.out.println(Thread.currentThread().getName()+" :: "+i+" ：轮数："+loop);
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(Thread.currentThread().getName() + " :: " + i + " ：轮数：" + loop);
             }
             //通知
             flag = 2; //修改标志位 2
             c2.signal(); //通知BB线程
-        }finally {
+        } finally {
             //释放锁
             lock.unlock();
         }
@@ -49,17 +49,17 @@ class ShareResource {
     public void print10(int loop) throws InterruptedException {
         lock.lock();
         try {
-            while(flag != 2) {
+            while (flag != 2) {
                 c2.await();
             }
-            for (int i = 1; i <=10; i++) {
-                System.out.println(Thread.currentThread().getName()+" :: "+i+" ：轮数："+loop);
+            for (int i = 1; i <= 10; i++) {
+                System.out.println(Thread.currentThread().getName() + " :: " + i + " ：轮数：" + loop);
             }
             //修改标志位
             flag = 3;
             //通知CC线程
             c3.signal();
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
@@ -68,17 +68,17 @@ class ShareResource {
     public void print15(int loop) throws InterruptedException {
         lock.lock();
         try {
-            while(flag != 3) {
+            while (flag != 3) {
                 c3.await();
             }
-            for (int i = 1; i <=15; i++) {
-                System.out.println(Thread.currentThread().getName()+" :: "+i+" ：轮数："+loop);
+            for (int i = 1; i <= 15; i++) {
+                System.out.println(Thread.currentThread().getName() + " :: " + i + " ：轮数：" + loop);
             }
             //修改标志位
             flag = 1;
             //通知AA线程
             c1.signal();
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
@@ -88,34 +88,34 @@ class ShareResource {
 public class ThreadDemo3 {
     public static void main(String[] args) {
         ShareResource shareResource = new ShareResource();
-        new Thread(()->{
-            for (int i = 1; i <=10; i++) {
+        new Thread(() -> {
+            for (int i = 1; i <= 10; i++) {
                 try {
                     shareResource.print5(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        },"AA").start();
+        }, "AA").start();
 
-        new Thread(()->{
-            for (int i = 1; i <=10; i++) {
+        new Thread(() -> {
+            for (int i = 1; i <= 10; i++) {
                 try {
                     shareResource.print10(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        },"BB").start();
+        }, "BB").start();
 
-        new Thread(()->{
-            for (int i = 1; i <=10; i++) {
+        new Thread(() -> {
+            for (int i = 1; i <= 10; i++) {
                 try {
                     shareResource.print15(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        },"CC").start();
+        }, "CC").start();
     }
 }

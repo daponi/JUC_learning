@@ -19,16 +19,21 @@ import java.util.concurrent.RecursiveTask;
 public class ForkJoinDemo02 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        int n =15;
-        System.out.println(Thread.currentThread().getName()+"线程开始 ：" + LocalDateTime.now().format( DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        int n = 15;
+        System.out.println(Thread.currentThread().getName() + "线程开始 ：" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         Integer result = new ForkJoinPool(100).invoke(new Fibonacci(n));
-        System.out.println("f("+n+")="+result);
-        System.out.println(Thread.currentThread().getName()+"线程结束 ：" + LocalDateTime.now().format( DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        System.out.println("f(" + n + ")=" + result);
+        System.out.println(Thread.currentThread().getName() + "线程结束 ：" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 }
+
 class Fibonacci extends RecursiveTask<Integer> {
     final int n;
-    Fibonacci(int n) { this.n = n; }
+
+    Fibonacci(int n) {
+        this.n = n;
+    }
+
     public Integer compute() {
         if (n <= 1)
             return n;

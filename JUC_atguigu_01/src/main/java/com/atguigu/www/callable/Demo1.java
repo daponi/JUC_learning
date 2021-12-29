@@ -22,7 +22,7 @@ class MyThread2 implements Callable {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Thread.currentThread().getName()+" come in callable");
+        System.out.println(Thread.currentThread().getName() + " come in callable");
         return 200;
     }
 }
@@ -30,23 +30,23 @@ class MyThread2 implements Callable {
 public class Demo1 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //Runnable接口创建线程
-        new Thread(new MyThread1(),"AA").start();
+        new Thread(new MyThread1(), "AA").start();
 
         //Callable接口,报错，因为Thread的构造方法没有Callable接口
-       // new Thread(new MyThread2(),"BB").start();
+        // new Thread(new MyThread2(),"BB").start();
 
         //FutureTask，实现Callable接口创建
         FutureTask<Integer> futureTask1 = new FutureTask<>(new MyThread2());
 
         //使用lam表达式对Callable实现创建
-        FutureTask<Integer> futureTask2 = new FutureTask<>(()->{
-            System.out.println(Thread.currentThread().getName()+" come in callable");
+        FutureTask<Integer> futureTask2 = new FutureTask<>(() -> {
+            System.out.println(Thread.currentThread().getName() + " come in callable");
             return 1024;
         });
 
         //创建一个线程
-        new Thread(futureTask2,"lucy").start();
-        new Thread(futureTask1,"mary").start();
+        new Thread(futureTask2, "lucy").start();
+        new Thread(futureTask1, "mary").start();
 
 //        while(!futureTask2.isDone()) {
 //            System.out.println("wait.....");
@@ -56,7 +56,7 @@ public class Demo1 {
 
         System.out.println(futureTask1.get());
 
-        System.out.println(Thread.currentThread().getName()+" come over");
+        System.out.println(Thread.currentThread().getName() + " come over");
         //FutureTask原理  未来任务
         /**
          * 在不影响主线程的情况下，可以再另单开一个线程做其它任务，最后再进行汇总，且只需要进行汇总一次

@@ -15,7 +15,7 @@ public class Demo2 {
         public void run() {
             try {
                 System.out.println(Thread.currentThread().getName() + "线程进入了 run方法");
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -29,14 +29,14 @@ public class Demo2 {
                 System.out.println(Thread.currentThread().getName() + "线程进入了 call方法,开始准备睡觉");
                 Thread.sleep(1000);
                 System.out.println(Thread.currentThread().getName() + "睡醒了");
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return System.currentTimeMillis();//callabe接口的call方法计算任务
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         //声明 runable
         Runnable runable = new MyThread1();
         //声明 callable
@@ -51,7 +51,7 @@ public class Demo2 {
             System.out.println(result1);
         }
         //线程一
-        new Thread(runable,"线程一").start();
+        new Thread(runable, "线程一").start();
     }
 }
 
