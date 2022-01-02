@@ -71,10 +71,10 @@ public class JVM_Test01 {
     }
 
     @Test
-    public void test05(){
-        int i=10,k =10;
-        i=i++;
-        int j=++k;
+    public void test05() {
+        int i = 10, k = 10;
+        i = i++;
+        int j = ++k;
         System.out.println(i);
         System.out.println(j);
         System.out.println(i++);
@@ -168,11 +168,13 @@ public class JVM_Test01 {
         new CodeTemplate00002();
     }
 }
-class MyNumber{
+
+class MyNumber {
     // int number=10;
-    volatile int number=10;
-    public void changeNum(){
-        this.number=1024;
+    volatile int number = 10;
+
+    public void changeNum() {
+        this.number = 1024;
     }
 }
 
@@ -186,11 +188,13 @@ class CodeTemplate {
         //静态代码块d
         System.out.println("==========这是CodeTemplate--静态代码块----");
     }
-    public CodeTemplate(){
+
+    public CodeTemplate() {
         System.out.println("==========这是CodeTemplate--构造方法----");
     }
 
 }
+
 class CodeTemplate00002 {
     {
         //构造块
@@ -201,7 +205,8 @@ class CodeTemplate00002 {
         //静态代码块d
         System.out.println("==========这是CodeTemplate00002--静态代码块----");
     }
-    public CodeTemplate00002(){
+
+    public CodeTemplate00002() {
         System.out.println("==========这是CodeTemplate00002--构造方法----");
     }
 

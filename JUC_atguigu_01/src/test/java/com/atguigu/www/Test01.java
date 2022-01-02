@@ -4,20 +4,20 @@ import org.junit.Test;
 
 public class Test01 {
     @Test
-    public void test01(){
-        Thread thread = new Thread(()->{
-            System.out.println(Thread.currentThread().getName()+":"+Thread.currentThread().isDaemon());
-            while (true){
+    public void test01() {
+        Thread thread = new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().isDaemon());
+            while (true) {
                 //保持用户线程一直存在而不结束
             }
-        },"Thread01");
+        }, "Thread01");
         thread.start();
 
-        System.out.println(Thread.currentThread().getName()+"\t : over");
+        System.out.println(Thread.currentThread().getName() + "\t : over");
     }
 
     @Test
-    public void test02(){
+    public void test02() {
         /**
          * jvm的类加载机制是自上而下加载，自下而上检查。
          * 开始是由BootStrap ClassLoader加载rt.jar下的文件，也就是java最最核心的部分即java.*；

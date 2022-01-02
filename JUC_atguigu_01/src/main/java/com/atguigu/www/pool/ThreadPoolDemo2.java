@@ -17,15 +17,15 @@ public class ThreadPoolDemo2 {
 
         //10个顾客请求
         try {
-            for (int i = 1; i <=10; i++) {
+            for (int i = 1; i <= 10; i++) {
                 //执行
-                threadPool.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+" 办理业务");
+                threadPool.execute(() -> {
+                    System.out.println(Thread.currentThread().getName() + " 办理业务");
                 });
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             //关闭
             threadPool.shutdown();
         }
