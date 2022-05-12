@@ -7,6 +7,9 @@
     <groupId>com.atguigu.www</groupId>
     <artifactId>JUC_learning</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>N2_JUC_itheima</module>
+    </modules>
 
 
     <!--父项目的pom.xml指定打包方式pom,否则子项目会报错-->
