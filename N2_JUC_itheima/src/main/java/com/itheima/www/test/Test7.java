@@ -35,6 +35,7 @@ public class Test7 {
         t1.interrupt();
         log.debug("t1 state 3: {}", t1.getState()); //线程t1还没被interrupt打断就先执行，所以此时还是TIMED_WAITING
         Thread.sleep(1);
+        // t1.join();
         log.debug("t1 state 6: {}", t1.getState()); //主线程main先睡眠1毫秒等线程t1先被中断sleep()，此时t1是RUNNABLE
 
     }
