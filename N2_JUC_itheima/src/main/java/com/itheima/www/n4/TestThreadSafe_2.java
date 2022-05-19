@@ -17,6 +17,8 @@ import java.util.ArrayList;
  * 栈中的局部变量不会有多个线程访问到，每个线程私有的，都访问自己的
  *
  * 注意private 或 final修饰方法的重要性
+ * private定义的方法是私有的，所有的private⽅法默认是final的，即不可继承的。所以当B继承A时，A的private⽅法print()不被B继承。
+ * ⽽B中的public⽅法print()相当于B添加的⼀个⽅法，不属于重写。因此，我们也不能重写被private修饰的方法，同时也可在方法前加final, 用于当前类被子类继承后,不允许子类对该方法重写。
  */
 public class TestThreadSafe_2 {
 
