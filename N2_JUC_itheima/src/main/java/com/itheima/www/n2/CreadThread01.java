@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 // public class CreadThread01 extends Thread{
 public class CreadThread01 {
     public static void main(String[] args) {
-        Thread thread01 = new Thread("Thread01"){
+        Thread thread01 = new Thread("Thread01") {
             @Override
             public void run() {
                 log.info("Thread--running...");
