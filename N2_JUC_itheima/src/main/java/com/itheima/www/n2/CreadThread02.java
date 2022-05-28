@@ -17,7 +17,7 @@ public class CreadThread02 {
 
         // 用lambda实现
         Runnable runnable02 = () -> log.info("running...");
-        Thread thread01 = new Thread(runnable01,"Thread01");
+        Thread thread01 = new Thread(runnable01, "Thread01");
         // thread01.setName("Thread01");
         /**
          * start方法是让线程进入初始化阶段，需要等到cpu的时间片轮转给了它，才是真正的进入运行状态
