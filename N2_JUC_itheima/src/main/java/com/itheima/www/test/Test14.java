@@ -51,6 +51,7 @@ public class Test14 {
         t1.interrupt();
 
     }
+
     private static void test3() {
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
