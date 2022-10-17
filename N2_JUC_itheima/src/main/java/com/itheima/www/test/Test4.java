@@ -28,7 +28,7 @@ public class Test4 {
         };
 
         t1.run();  //是main线程调用，而不是开启t1线程
-        // t1.start();
+        t1.start(); // 开启新的线程，thread类中的start方法调用的是native方法，也就是c++方法，又操作系统来new线程
         log.debug("do other things...");
     }
 }

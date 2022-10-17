@@ -13,6 +13,7 @@ import com.itheima.www.n2.util.FileReader;
 public class Sync {
 
     public static void main(String[] args) {
+        //同步调用
         FileReader.read(Constants.MP4_FULL_PATH);
         log.info("do other things ...");
     }
