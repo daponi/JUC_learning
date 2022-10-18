@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import static com.itheima.www.n2.util.Sleeper.sleep;
 
+/**
+ * 线程八锁
+ */
 @Slf4j(topic = "c.Test8Locks")
 public class Test8Locks {
     public static void main(String[] args) {
@@ -13,16 +16,16 @@ public class Test8Locks {
         new Thread(() -> {
             log.debug("begin");
             n1.a();
-        }).start();
+        },"t1").start();
         new Thread(() -> {
             log.debug("begin");
             n1.b();
-        }).start();
+        },"t2").start();
 
         new Thread(() -> {
             log.debug("begin");
             n1.c();
-        }).start();
+        },"t3").start();
     }
 }
 
