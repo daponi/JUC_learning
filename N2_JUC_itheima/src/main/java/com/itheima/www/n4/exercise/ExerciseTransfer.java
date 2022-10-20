@@ -4,6 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
 
+/**
+ * 转账练习，
+ * A与B互相转账
+ * A转给B，会同时导致A、B的账户都发生变化，此时A、B都存在临界区，会有线程安全问题
+ */
 @Slf4j(topic = "c.ExerciseTransfer")
 public class ExerciseTransfer {
     public static void main(String[] args) throws InterruptedException {
