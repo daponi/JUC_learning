@@ -8,6 +8,7 @@ import java.util.Random;
  * 转账练习，
  * A与B互相转账
  * A转给B，会同时导致A、B的账户都发生变化，此时A、B都存在临界区，会有线程安全问题
+ * B转给A同理如上
  */
 @Slf4j(topic = "c.ExerciseTransfer")
 public class ExerciseTransfer {
