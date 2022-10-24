@@ -60,7 +60,7 @@ class Account {
 
     // 转账
     public void transfer(Account target, int amount) {
-        synchronized(Account.class) {
+        synchronized (Account.class) {
             if (this.money >= amount) {
                 this.setMoney(this.getMoney() - amount);
                 target.setMoney(target.getMoney() + amount);
