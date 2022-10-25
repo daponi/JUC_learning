@@ -33,5 +33,18 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
+
+        <!--<dependency>-->
+        <!--    <groupId>org.openjdk.jol</groupId>-->
+        <!--    <artifactId>jol-core</artifactId>-->
+        <!--    <version>0.16</version>-->
+        <!--</dependency>-->
+
+        <!-- 修改了org.openjdk.jol.info.ClassLayout类的包，用于输出偏向锁的信息-->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.16-myTest</version>
+        </dependency>
     </dependencies>
 </project>
