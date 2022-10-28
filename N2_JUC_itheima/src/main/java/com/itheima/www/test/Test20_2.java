@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 同步模式之保护性暂停：
  *例子:t1线程需要t2线程计算的值，
  * 因为要等待另一方的结果，因此归类到同步模式，不用join而用wait/notify(all)，因为Join是整个线程结束才返回，但是阻塞的t1线程只需要那个response有值没必要等另一个线程全部执行完
  * 等待线程不需要完全等待处理线程执行完，处理线程可能处理了一半就获取到响应结果从而唤醒等待线程了，不需要像join一样完全等待，
  * 而且线程调用notify后不会立马释放锁，而是需要等代码块执行完，且消费者线程被唤醒了仍需要进入entryList竞争时间片
  *
  * 增加超时功能
+ * 该例子就是模仿的Thread.join()的源码
  */
 @Slf4j
 public class Test20_2 {
