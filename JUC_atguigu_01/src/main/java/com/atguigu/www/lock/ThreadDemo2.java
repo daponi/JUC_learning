@@ -26,7 +26,7 @@ class Share {
         //上锁
         lock.lock();
         try {
-            //判断写到循环里，防止虚假唤醒
+            //判断写到循环里，防止虚假唤醒,让wait线程并不具有竟态条件
             while (number != 0) {
                 condition.await();
             }

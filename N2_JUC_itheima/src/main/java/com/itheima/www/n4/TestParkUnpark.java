@@ -9,7 +9,7 @@ import static com.itheima.www.n2.util.Sleeper.sleep;
 /**
  * 与 Object 的 wait & notify 相比
  * 1.wait，notify 和 notifyAll 必须配合 Object Monitor 一起使用，而 park，unpark 不必
- * 2.park & unpark 是以线程为单位来【阻塞】和【唤醒】线程，而 notify 只能随机唤醒一个等待线程，notifyAll,是唤醒所有等待线程，就不那么【精确】
+ * 2.park & unpark 是以线程为单位来精确而【阻塞】和【唤醒】线程，而 notify 只能随机唤醒一个等待线程，notifyAll,是唤醒所有等待线程，就不那么【精确】
  * 3.park & unpark 可以先 unpark，而 wait & notify 不能先 notify
  *
  * park 线程, 不会清空打断状态
@@ -24,18 +24,20 @@ public class TestParkUnpark {
         Thread t1 = new Thread(() -> {
             log.debug("start...");
             sleep(2);
+            // 如果许可证可用，则它被消耗，并且该呼叫立即返回; 否则当前线程对于线程调度目的将被禁用，并且处于休眠状态
+            LockSupport.park(); // 消耗掉许可证，即该处的park()没有作用，线程不会进入阻塞
             log.debug("park...");
-            LockSupport.park();
+            LockSupport.park(); // 许可证已被消耗，进入waitSet的阻塞状态
             log.debug("park...2");
-            LockSupport.park();
-            log.debug("park...3");
-            LockSupport.park(); // 第三个park还是暂停了线程，2个park却没有
-            log.debug("resume...");
         }, "t1");
         t1.start();
 
         sleep(1);
+        //为给定的线程提供许可证（如果尚未提供）。 如果线程在park被阻塞，那么它将被解除阻塞。 否则，其下一次拨打park保证不被阻止。 如果给定的线程尚未启动，则此操作无法保证完全没有任何影响。
+        LockSupport.unpark(t1); //
         log.debug("unpark...");
+        sleep(2);
         LockSupport.unpark(t1);
+        log.debug("unpark 2...");
     }
 }

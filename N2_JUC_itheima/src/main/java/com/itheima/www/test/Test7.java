@@ -17,6 +17,7 @@ public class Test7 {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     log.debug("wake up...");
+                    log.debug("t1 state 3: {}", currentThread().getState());//RUNNABLE
                     if (this.isInterrupted()) //不进入该循环，interruptted()将线程的中断标志isInterrupted()重新设置为false.
                         log.debug("t1 state 4: {}", this.getState());
                     if (!Thread.interrupted()) {
@@ -33,10 +34,9 @@ public class Test7 {
         log.debug("t1 state 2: {}", t1.getState()); // TIMED_WAITING
         log.debug("interrupt...");
         t1.interrupt();
-        log.debug("t1 state 3: {}", t1.getState()); //线程t1还没被interrupt打断就先执行，所以此时还是TIMED_WAITING
-        Thread.sleep(1);
+        Thread.sleep(1000);
         // t1.join();
-        log.debug("t1 state 6: {}", t1.getState()); //主线程main先睡眠1毫秒等线程t1先被中断sleep()，此时t1是RUNNABLE
+        log.debug("t1 state 6: {}", t1.getState()); //主线程main先睡眠1毫秒等线程t1先被中断sleep()，此时t1是TERMINATED
 
     }
 }

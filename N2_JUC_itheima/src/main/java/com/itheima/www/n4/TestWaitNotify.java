@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
  *
  * 它们都是线程之间进行协作的手段，都属于 Object 对象的方法，是重量级锁(10，即monitor)
  * 必须获得此对象的锁即在synchronized内才能调用这几个方法
+ *
+ * 可调试看它们的状态转换。
  */
 @Slf4j
 public class TestWaitNotify {
@@ -25,7 +27,7 @@ public class TestWaitNotify {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                log.debug("t1其它代码......");
+                log.debug("t1其它代码......");// 断点
             }
         },"t1").start();
 
@@ -37,7 +39,7 @@ public class TestWaitNotify {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                log.debug("t2其它代码......");
+                log.debug("t2其它代码......");// 断点
             }
         },"t2").start();
 
@@ -45,7 +47,7 @@ public class TestWaitNotify {
         log.debug("开始唤醒obj上的其它线程");
         synchronized(OBJ){
            // OBJ.notify(); // 唤醒obj上一个线程
-            OBJ.notifyAll(); // 唤醒obj上所有等待线程
+            OBJ.notifyAll(); // 唤醒obj上所有等待线程// 断点
         }
     }
 }
