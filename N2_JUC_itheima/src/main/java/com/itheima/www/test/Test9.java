@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * yieID()的使用
  */
 @Slf4j
-public class test9 {
+public class Test9 {
     public static void main(String[] args) {
         Thread t1 = new Thread(){
             @SneakyThrows
