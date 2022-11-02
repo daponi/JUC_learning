@@ -19,7 +19,7 @@ public class Test34 {
         System.out.println(i.getAndAdd(5));//先+5再返回   2
         System.out.println(i.addAndGet(-1 * 5));//乘以-5  2
 
-        System.out.println(i.updateAndGet(value -> -1 * value));// -2
+        System.out.println(i.updateAndGet(value -> -1 * value));// -2，源码就是CAS
 
         System.out.println(updateAndGet(i, Value -> Value * -5)); //10
     }

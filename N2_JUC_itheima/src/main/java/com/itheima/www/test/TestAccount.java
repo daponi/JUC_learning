@@ -1,6 +1,8 @@
 package com.itheima.www.test;
 
 
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -43,8 +45,10 @@ class AccountCas implements Account{
                break;
             }
         }*/
+
         // 原子操作
-        balance.getAndAdd(-1*amount);
+        // balance.getAndAdd(-1*amount);
+        balance.getAndUpdate(Value->Value-amount); //源码就是CAS
 
     }
 }
@@ -92,6 +96,7 @@ interface Account {
 
 
     /**
+     * 测试方法：
      * 方法内会启动 1000 个线程，每个线程做 -10 元 的操作
      * 如果初始余额为 10000 那么正确的结果应当是 0
      */
