@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * AtomicReference
  * AtomicMarkableReference
  * AtomicStampedReference
+ *
+ * BIgdecimal这里也是一个面试题：Bigdecimal一定能保证数据正确？不能，它不能保证原子性
  */
 public class Test35 {
     public static void main(String[] args) {
