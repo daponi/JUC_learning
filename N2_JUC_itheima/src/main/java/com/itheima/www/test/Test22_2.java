@@ -13,7 +13,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * 4.支持多个条件变量
  * 与 synchronized 一样，都支持可重入
  *
- * 可中断
+ * 可中断 ：当前线程进入entryList等待锁进入阻塞状态时，可以被其它线程打
+ * 注意如果是不可中断模式，那么即使使用了interrupt也不会让等待中断
  */
 @Slf4j
 public class Test22_2 {
@@ -36,9 +37,9 @@ public class Test22_2 {
             }
         }, "t1");
 
-        lock.lock();
+        lock.lock(); //main线程先加锁
         log.debug("main获得了锁。。。");
-        t1.start();
+        t1.start(); // t1线程进入阻塞
         try {
             TimeUnit.SECONDS.sleep(1);
             log.debug("开始intterrupt》。。");

@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 4.支持多个条件变量
  * 与 synchronized 一样，都支持可重入
  *
- * 可重入性
+ * 可重入性：锁里面可以继续加锁
  */
 @Slf4j(topic = "C.ReentrantLock")
 public class Test22 {
