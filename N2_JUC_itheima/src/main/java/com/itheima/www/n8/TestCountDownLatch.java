@@ -4,6 +4,8 @@ import com.itheima.www.n2.util.Sleeper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * CountdownLatch
@@ -14,10 +16,38 @@ import java.util.concurrent.CountDownLatch;
 @Slf4j
 public class TestCountDownLatch {
     public static void main(String[] args) {
+        ExecutorService pool = Executors.newFixedThreadPool(2);
         CountDownLatch countDownLatch = new CountDownLatch(3);
-        test1(countDownLatch);
+        pool.submit(() -> {
+            log.debug("begin ---");
+            Sleeper.sleep(1);
+            countDownLatch.countDown();
+            log.debug("end >>>");
+        });
 
+        pool.submit(() -> {
+            log.debug("begin ---");
+            Sleeper.sleep(1);
+            countDownLatch.countDown();
+            log.debug("end >>>");
+        });
 
+        pool.submit(() -> {
+            log.debug("begin ---");
+            Sleeper.sleep(1);
+            countDownLatch.countDown();
+            log.debug("end >>>");
+        });
+
+        pool.submit(() -> {
+            log.debug("begin await，，，，，");
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.debug("end ，，，，");
+        });
     }
 
     private static void test1(CountDownLatch countDownLatch) {
