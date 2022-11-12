@@ -15,6 +15,7 @@ buildNumber.properties
 *.idea
 /.idea/
 /out/
+/logs/
 
 target/
 /.settings/
