@@ -23,8 +23,8 @@ public class TestWordCount {
 
         // 统计单词
         // test1();
-        countWords(()->new ConcurrentHashMap<String , LongAdder>(),
-                (countMap,wordsList)->{
+        countWords(() -> new ConcurrentHashMap<String, LongAdder>(),
+                (countMap, wordsList) -> {
                     for (String word : wordsList) {
                         /**
                          * computeIfAbsent()如果缺少一个Key，则计算生成一个value，然后将key value放入map，并返回旧vale
@@ -50,17 +50,17 @@ public class TestWordCount {
     private static void test1() {
         countWords(
                 // () -> new HashMap<String, Integer>(), //HashMap不是线程安全的
-                () -> new ConcurrentHashMap<String,Integer>(),
+                () -> new ConcurrentHashMap<String, Integer>(),
 
                 (countMap, wordsList) -> {
                     // 临界区
 
                     // synchronized (countMap) { //对整个保存结果的map加synchronize则效率低，不能体现26个线程访问的高效率
-                        for (String word : wordsList) {
-                            Integer number = countMap.get(word);
-                            int newNumber = number == null ? 1 : number + 1;
-                            countMap.put(word, newNumber);
-                        }
+                    for (String word : wordsList) {
+                        Integer number = countMap.get(word);
+                        int newNumber = number == null ? 1 : number + 1;
+                        countMap.put(word, newNumber);
+                    }
                     // }
                 });
     }
@@ -75,7 +75,7 @@ public class TestWordCount {
     private static <T> void countWords(Supplier<Map<String, T>> supplier, BiConsumer<Map<String, T>, List<String>> consumer) {
         Map<String, T> countMap = supplier.get();
         List<Thread> ts = new ArrayList<>();
-        long start =System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
         for (int i = 0; i < 26; i++) {
             int index = i;
@@ -93,9 +93,9 @@ public class TestWordCount {
                 e.printStackTrace();
             }
         });
-        long end =System.currentTimeMillis();
+        long end = System.currentTimeMillis();
         log.debug("统计结果:\n {}", countMap);
-        log.debug("耗时：{}",end-start);
+        log.debug("耗时：{}", end - start);
 
     }
 
