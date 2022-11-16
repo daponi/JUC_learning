@@ -7,6 +7,11 @@ import static com.itheima.www.n2.util.Sleeper.sleep;
 
 /**
  * Join方法的使用，
+ * Thread的join方法：
+ * join方法是Thread类中的一个方法，该方法的定义是等待该线程执行直到终止。其实就说join方法将挂起调用线程的执行，直到被调用的对象完成它的执行。
+ * ● 调用线程：当前线程，即调用了﻿t.join()﻿语句的线程，
+ * ● 被调用的对象：t.join当中的线程对象t
+ *
  * 结果消耗2s
  */
 @Slf4j(topic = "c.TestJoin")
@@ -18,7 +23,38 @@ public class TestJoin {
     public static void main(String[] args) throws InterruptedException {
         // test1();
         // test2();
-        test3();
+        // test3();
+        test4();
+
+    }
+
+    private static void test4() {
+        Thread t1 =new Thread(()->{
+            log.debug("t1 start。。。");
+            sleep(15);
+            log.debug("t1 end。。。");
+        },"t1");
+        t1.start();
+
+        Thread t2 =new Thread(()->{
+
+            log.debug("t2 start。。。");
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                log.debug("t2 interrupted！！！");
+                e.printStackTrace();
+            }
+            log.debug("t2 end。。。");
+
+        },"t2");
+        t2.start();
+
+        sleep(2);
+        log.debug("main sleep。。。。");
+        t2.interrupt();
+        // t1.join();
+        log.debug("main end》》》");
     }
 
     public static void test3() throws InterruptedException {
