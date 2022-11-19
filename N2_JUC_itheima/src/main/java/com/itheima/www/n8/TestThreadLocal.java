@@ -17,6 +17,7 @@ import java.sql.SQLException;
  * 多数据源用这玩意
  * <p>
  * 初始容量16，扩容因子2/3，扩容方法是开放寻址法而不是Map的拉链法
+ *
  * 为什么ThreadLocalMap中的key ( 即ThreadLocal )要设计为弱引用?
  * ①Thread 可能需要长时间运行(如线程池中的线程)，如果key不再使用，需要在内存不足(GC)时释放其占用的内存
  * ②但GC仅是让key的内存释放但value内存仍在，后续还要根据key是否为null来进一步释放值value的内存,释放时机有:
