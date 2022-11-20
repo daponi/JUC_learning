@@ -42,68 +42,6 @@ public class ATest {
         // i=i++;
         //  // i++; //输出为1
         // System.out.println(i); // 输出为0
-        test();
-    }
-
-    public static void test() throws ExecutionException, InterruptedException {
-        log.debug("主线程开始");
-        // CompletableFuture数组
-        CompletableFuture<Integer>[] futuresArray = new CompletableFuture[4];
-
-        CompletableFuture<Integer> job1 = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(5000);
-                log.debug("加 10 任务开始");
-                num += 10;
-                log.debug("加 10 任务结束。。。");
-                return num;
-            } catch (Exception e) {
-                return 0;
-            }
-        });
-        futuresArray[0] = job1;
-
-        CompletableFuture<Integer> job2 = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(3000);
-                log.debug("乘 10 任务开始");
-                num = num * 10;
-                log.debug("乘 10 任务结束。。。");
-                return num;
-            } catch (Exception e) {
-                return 1;
-            }
-        });
-        futuresArray[1] = job2;
-
-        CompletableFuture<Integer> job3 = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(2000);
-                log.debug("减 10 任务开始");
-                num = num - 10;
-                log.debug("减 10 任务结束。。。");
-                return num;
-            } catch (Exception e) {
-                return 2;
-            }
-        });
-        futuresArray[2] = job3;
-
-        CompletableFuture<Integer> job4 = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(4000);
-                log.debug("除 10 任务开始");
-                num = num / 10;
-                log.debug("除 10 任务结束。。。");
-                return num;
-            } catch (Exception e) {
-                return 3;
-            }
-        });
-        futuresArray[3] = job4;
-
-        CompletableFuture<Object> future = CompletableFuture.anyOf(futuresArray);
-        log.debug("结果:{}",future.get());
     }
 }
 

@@ -55,7 +55,7 @@ public class TestForkJoinTask {
     }
     public static void test3(){
         long start = System.currentTimeMillis();
-        // Stream并行流 ()  (]
+        // Stream并行流 ()
         long sum = LongStream.rangeClosed(0L, 10_0000_0000L).parallel().reduce(0, Long::sum);
         long end = System.currentTimeMillis();
         log.debug("test3,sum="+"时间："+(end-start));
