@@ -28,5 +28,24 @@
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
         </dependency>
+
+        <!--Logback是SpringBoot内置的日志处理框架,你会发现spring-boot-starter其中包含了spring-boot-starter-logging，该依赖内容就是 Spring Boot 默认的日志框架 logback
+默认的命名规则，并且放在 src/main/resources 下面即可，注意：logback.xml加载早于application.yml
+Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml）
+-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.16-myTest</version>
+            <scope>compile</scope>
+        </dependency>
+
+
     </dependencies>
 </project>
